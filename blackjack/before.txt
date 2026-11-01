@@ -1,9 +1,4 @@
 Game start!
-[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
-52
-[Hearts, Hearts, Hearts, Hearts, Hearts, Hearts, Hearts, Hearts, Hearts, Hearts, Hearts, Hearts, Hearts, Spades, Spades, Spades, Spades, Spades, Spades, Spades, Spades, Spades, Spades, Spades, Spades, Spades, Clubs, Clubs, Clubs, Clubs, Clubs, Clubs, Clubs, Clubs, Clubs, Clubs, Clubs, Clubs, Clubs, Diamonds, Diamonds, Diamonds, Diamonds, Diamonds, Diamonds, Diamonds, Diamonds, Diamonds, Diamonds, Diamonds, Diamonds, Diamonds]
-52
-[11, 10, 8, 4, 1, 4, 7, 2, 1, 8, 8, 10, 6, 6, 13, 11, 13, 3, 13, 4, 3, 5, 2, 5, 8, 7, 12, 13, 9, 12, 10, 7, 5, 11, 9, 1, 6, 6, 12, 10, 5, 2, 12, 9, 4, 2, 11, 1, 3, 3, 7, 9]
-52
-[Spades, Hearts, Spades, Spades, Hearts, Clubs, Spades, Spades, Clubs, Diamonds, Clubs, Clubs, Hearts, Diamonds, Hearts, Clubs, Clubs, Hearts, Diamonds, Hearts, Diamonds, Clubs, Diamonds, Hearts, Hearts, Clubs, Diamonds, Spades, Diamonds, Clubs, Spades, Hearts, Spades, Diamonds, Clubs, Diamonds, Spades, Clubs, Hearts, Diamonds, Diamonds, Hearts, Spades, Hearts, Diamonds, Clubs, Hearts, Spades, Spades, Clubs, Diamonds, Spades]
-52
+Dealer: 11 of Spades, [hidden]
+You: 8 of Spades, 4 of Spades (12)
+[h]it or [s]tand? > 
