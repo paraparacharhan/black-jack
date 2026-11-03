@@ -27,6 +27,18 @@ public class BlackJackApp {
         return sum == 21;
     }
 
+    public static int checkAceScore(List<Integer> handsOfNumberCards, int sum) {
+        // handsOfNumberCards.stream().filter(t -> t > sum && t == 11).map(t ->
+        // 1).toList();
+        for (int i = 0; i < handsOfNumberCards.size(); i++) {
+            if (sum > 21 && handsOfNumberCards.get(i) == 11) {
+                handsOfNumberCards.set(i, 1);
+                sum -= 10;
+            }
+        }
+        return sum;
+    }
+
     public static void main(String[] args) {
         System.out.println("Game start!");
 
@@ -86,14 +98,7 @@ public class BlackJackApp {
         // BlackJackか判定し、ステータスとする
         boolean myStatus = isBlackJack(mySum);
 
-        // Aを1か11かで変化するのを判定する
-        for (int i = 0; i < myNumber.size(); i++) {
-            if (mySum > 21 && myNumber.get(i) == 11) {
-                myNumber.set(i, 1);
-                mySum -= 10;
-            }
-
-        }
+        mySum = checkAceScore(myNumber, mySum);
 
         // Playerの手札を表示する
         System.out.print("You: ");
@@ -130,13 +135,7 @@ public class BlackJackApp {
                 System.out.println(
                         "You: " + myNumber.get(myNumber.size() - 1) + " of " + mySuit.get(mySuit.size() - 1) + " .");
 
-                // Aを1か11かで変化するのを判定する
-                for (int i = 0; i < myNumber.size(); i++) {
-                    if (mySum > 21 && myNumber.get(i) == 11) {
-                        myNumber.set(i, 1);
-                        mySum -= 10;
-                    }
-                }
+                mySum = checkAceScore(myNumber, mySum);
 
                 // Playerの手札を表示する
                 // 多分joiningで綺麗にできる
@@ -163,13 +162,7 @@ public class BlackJackApp {
             }
         }
 
-        // Aを1か11かで変化するのを判定する
-        for (int i = 0; i < dealerNumber.size(); i++) {
-            if (dealerSum > 21 && dealerNumber.get(i) == 11) {
-                dealerNumber.set(i, 1);
-                dealerSum -= 10;
-            }
-        }
+        dealerSum = checkAceScore(dealerNumber, dealerSum);
 
         // Dealerの手札を表示する
         System.out.print("Dealer: ");
@@ -195,13 +188,7 @@ public class BlackJackApp {
             // Dealerの合計を計算する
             dealerSum = totalScore(dealerNumber);
 
-            // Aを1か11かで変化するのを判定する
-            for (int i = 0; i < dealerNumber.size(); i++) {
-                if (dealerSum > 21 && dealerNumber.get(i) == 11) {
-                    dealerNumber.set(i, 1);
-                    dealerSum -= 10;
-                }
-            }
+            dealerSum = checkAceScore(dealerNumber, dealerSum);
 
             // Dealerの手札を表示する
             System.out.print("Dealer: ");
