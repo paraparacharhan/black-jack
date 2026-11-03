@@ -1,0 +1,13 @@
+Game start!
+Dealer: 10 of Spades, [hidden]
+You: 8 of Spades, 4 of Spades, (12)
+[h]it or [s]tand? > h
+You: 11 of Hearts .
+You: 8 of Spades, 4 of Spades, 1 of Hearts, (13)
+[h]it or [s]tand? > h
+You: 4 of Clubs .
+You: 8 of Spades, 4 of Spades, 1 of Hearts, 4 of Clubs, (17)
+[h]it or [s]tand? > s
+Dealer: 10 of Spades, 10 of Hearts, (20)
+You: 17 / Dealer: 20
+Dealer win!

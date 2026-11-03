@@ -15,6 +15,7 @@ public class BlackJackApp {
     public static void main(String[] args) {
         System.out.println("Game start!");
 
+        // Deckを生成する
         List<String> suit = List.of("Hearts", "Spades", "Clubs", "Diamonds");
         LinkedList<Integer> deckNumberList = new LinkedList<>(
                 Arrays.asList(11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10,
@@ -26,11 +27,9 @@ public class BlackJackApp {
         for (int i = 0; i < 52; i++) {
             deckSuitList.add(suit.get(i / 13));
         }
-        // System.out.println(deckNumberList);
-        // System.out.println(deckNumberList.size());
-        // System.out.println(deckSuitList);
-        // System.out.println(deckSuitList.size());
 
+        // argumentを変換する
+        // Deckをシャッフルする
         try {
             int seed = Integer.parseInt(args[0]);
             Random numberRandom = new Random(seed);
@@ -40,41 +39,46 @@ public class BlackJackApp {
         } catch (NumberFormatException e) {
             System.out.println(e);
         }
-        // System.out.println(deckNumberList);
-        // System.out.println(deckNumberList.size());
-        // System.out.println(deckSuitList);
-        // System.out.println(deckSuitList.size());
+
+        // Dealerの手札を生成する
         List<Integer> dealerNumber = new ArrayList<>();
         List<String> dealerSuit = new ArrayList<>();
         int dealerIndex = 0;
 
+        // Dealerがカードを引く
         dealerNumber.add(deckNumberList.pop());
         dealerSuit.add(deckSuitList.pop());
         dealerNumber.add(deckNumberList.pop());
         dealerSuit.add(deckSuitList.pop());
+
+        // Dealerの手札を表示する（1枚隠し）
         System.out.println(
                 "Dealer: " + dealerNumber.get(dealerIndex) + " of " + dealerSuit.get(dealerIndex) + ", [hidden]");
+
+        // Dealerの合計を計算する
         int dealerSum = dealerNumber.get(0) + dealerNumber.get(1);
 
+        // Playerの手札を生成する
         List<Integer> myNumber = new ArrayList<>();
         List<String> mySuit = new ArrayList<>();
         int myIndex = 0;
 
+        // Playerがカードを引く
         myNumber.add(deckNumberList.pop());
         mySuit.add(deckSuitList.pop());
         myNumber.add(deckNumberList.pop());
         mySuit.add(deckSuitList.pop());
+
+        // Playerの合計を計算する
         int mySum = myNumber.get(myIndex) + myNumber.get(myIndex + 1);
+
+        // BlackJackか判定し、ステータスとする
         boolean myStatus = false;
         if (mySum == 21) {
             myStatus = true;
         }
-        // int mySum = myNumber.get(myIndex) + myNumber.get(myIndex + 1);
 
-        // System.out.println(
-        // "You: " + myNumber.get(dealerIndex) + " of " + mySuit.get(dealerIndex) + ", "
-        // + myNumber.get(dealerIndex + 1) + " of " + mySuit.get(dealerIndex + 1) + " ("
-        // + mySum + ")");
+        // Aを1か11かで変化するのを判定する
         for (int i = 0; i < myNumber.size(); i++) {
             if (mySum > 21 && myNumber.get(i) == 11) {
                 myNumber.set(i, 1);
@@ -83,6 +87,7 @@ public class BlackJackApp {
 
         }
 
+        // Playerの手札を表示する
         System.out.print("You: ");
         // 多分joiningで綺麗にできる
         for (int i = 0; i < myNumber.size(); i++) {
@@ -92,91 +97,122 @@ public class BlackJackApp {
 
         Scanner scanner = new Scanner(System.in);
 
+        // hitかstandかをするゲームを開始する
         while (true) {
+            // BlackJackか判定する
             if (myStatus) {
                 break;
             }
+
+            // 入力を受け取り、[h]itか[s]tandかそれ以外かを判定する
             String input = scanner.nextLine();
+
+            // hitの場合
             if (input.equals("h")) {
+                // Playerがカードを1枚引く
                 System.out.println("[h]it or [s]tand? > h");
                 myNumber.add(deckNumberList.pop());
                 mySuit.add(deckSuitList.pop());
 
+                // Playerの合計を計算する
                 mySum += myNumber.get(myNumber.size() - 1);
+
+                // 引いたカードを表示する
                 System.out.println(
                         "You: " + myNumber.get(myNumber.size() - 1) + " of " + mySuit.get(mySuit.size() - 1) + " .");
+
+                // Aを1か11かで変化するのを判定する
                 for (int i = 0; i < myNumber.size(); i++) {
                     if (mySum > 21 && myNumber.get(i) == 11) {
                         myNumber.set(i, 1);
                         mySum -= 10;
                     }
-
                 }
+
+                // Playerの手札を表示する
                 // 多分joiningで綺麗にできる
                 System.out.print("You: ");
                 for (int i = 0; i < myNumber.size(); i++) {
                     System.out.print(myNumber.get(i) + " of " + mySuit.get(i) + ", ");
                 }
                 System.out.println("(" + mySum + ")");
+
+                // Burstか判定する
                 if (mySum > 21) {
                     System.out.println("You Burst");
                     return;
                 }
+
+                // standの場合
             } else if (input.equals("s")) {
+                // Playerのターンを抜ける
                 System.out.println("[h]it or [s]tand? > s");
                 break;
             } else {
+                // 不正入力としてやり直す
                 System.err.println("Error input");
             }
         }
 
+        // Aを1か11かで変化するのを判定する
         for (int i = 0; i < dealerNumber.size(); i++) {
             if (dealerSum > 21 && dealerNumber.get(i) == 11) {
                 dealerNumber.set(i, 1);
                 dealerSum -= 10;
             }
-
         }
+
+        // Dealerの手札を表示する
         System.out.print("Dealer: ");
         for (int i = 0; i < dealerNumber.size(); i++) {
             System.out.print(dealerNumber.get(i) + " of " + dealerSuit.get(i) + ", ");
         }
         System.out.println("(" + dealerSum + ")");
 
+        // BrackJackか判定し、ステータスとする
         boolean dealerStatus = false;
         if (dealerSum == 21) {
             dealerStatus = true;
         }
+
+        // Dealerが17以上になるまで続ける
         while (dealerSum < 17 && !dealerStatus && !myStatus) {
 
+            // Dealerがカードを1枚引く
             dealerNumber.add(deckNumberList.pop());
             dealerSuit.add(deckSuitList.pop());
 
+            // Dealerの引いたカードを表示する
             System.out.println(
                     "Dealer: " + dealerNumber.get(dealerNumber.size() - 1) + " of "
                             + dealerSuit.get(dealerSuit.size() - 1)
                             + " .");
+            // Dealerの合計を計算する
             dealerSum += dealerNumber.get(dealerNumber.size() - 1);
 
+            // Aを1か11かで変化するのを判定する
             for (int i = 0; i < dealerNumber.size(); i++) {
                 if (dealerSum > 21 && dealerNumber.get(i) == 11) {
                     dealerNumber.set(i, 1);
                     dealerSum -= 10;
                 }
-
             }
 
+            // Dealerの手札を表示する
             System.out.print("Dealer: ");
             for (int i = 0; i < dealerNumber.size(); i++) {
                 System.out.print(dealerNumber.get(i) + " of " + dealerSuit.get(i) + ", ");
             }
             System.out.println("(" + dealerSum + ")");
         }
+
+        // Burstか判定する
         if (dealerSum > 21) {
             System.out.println("Dealer burst");
             return;
         }
 
+        // 最終結果を表示する
         System.out.print("You: " + mySum + " / ");
         System.out.println("Dealer: " + dealerSum);
         if (mySum > dealerSum) {
@@ -184,6 +220,7 @@ public class BlackJackApp {
         } else if (mySum < dealerSum) {
             System.out.println("Dealer win!");
         } else {
+            // 同点でBlackJackがあるか判定
             if (myNumber.size() == 2 && mySum == 21 && dealerNumber.size() == 2 && dealerSum == 21) {
                 System.out.println("Draw");
             } else if (myNumber.size() == 2 && mySum == 21) {
