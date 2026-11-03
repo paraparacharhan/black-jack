@@ -13,6 +13,9 @@ import java.util.Scanner;
  */
 public class BlackJackApp {
 
+    public static final int BLACK_JACK_SCORE = 21;
+    public static final int DEALER_BORDER_SCORE = 17;
+
     public static void drawCards(LinkedList<Integer> numberDeck, LinkedList<String> suitDeck,
             List<Integer> handOfNumberCards, List<String> handOfSuitCards) {
         handOfNumberCards.add(numberDeck.pop());
@@ -24,14 +27,14 @@ public class BlackJackApp {
     }
 
     public static boolean isBlackJack(int sum) {
-        return sum == 21;
+        return sum == BLACK_JACK_SCORE;
     }
 
     public static int checkAceScore(List<Integer> handsOfNumberCards, int sum) {
         // handsOfNumberCards.stream().filter(t -> t > sum && t == 11).map(t ->
         // 1).toList();
         for (int i = 0; i < handsOfNumberCards.size(); i++) {
-            if (sum > 21 && handsOfNumberCards.get(i) == 11) {
+            if (sum > BLACK_JACK_SCORE && handsOfNumberCards.get(i) == 11) {
                 handsOfNumberCards.set(i, 1);
                 sum -= 10;
             }
@@ -147,7 +150,7 @@ public class BlackJackApp {
                 display("You", myNumber, mySuit, mySum);
 
                 // Burstか判定する
-                if (mySum > 21) {
+                if (mySum > BLACK_JACK_SCORE) {
                     System.out.println("You Burst");
                     return;
                 }
@@ -173,7 +176,7 @@ public class BlackJackApp {
         boolean dealerStatus = isBlackJack(dealerSum);
 
         // Dealerが17以上になるまで続ける
-        while (dealerSum < 17 && !dealerStatus && !myStatus) {
+        while (dealerSum < DEALER_BORDER_SCORE && !dealerStatus && !myStatus) {
 
             // メソッド切り出し
             drawCards(deckNumberList, deckSuitList, dealerNumber, dealerSuit);
@@ -194,7 +197,7 @@ public class BlackJackApp {
         }
 
         // Burstか判定する
-        if (dealerSum > 21) {
+        if (dealerSum > BLACK_JACK_SCORE) {
             System.out.println("Dealer burst");
             return;
         }
@@ -208,11 +211,12 @@ public class BlackJackApp {
             System.out.println("Dealer win!");
         } else {
             // 同点でBlackJackがあるか判定
-            if (myNumber.size() == 2 && mySum == 21 && dealerNumber.size() == 2 && dealerSum == 21) {
+            if (myNumber.size() == 2 && mySum == BLACK_JACK_SCORE && dealerNumber.size() == 2
+                    && dealerSum == BLACK_JACK_SCORE) {
                 System.out.println("Draw");
-            } else if (myNumber.size() == 2 && mySum == 21) {
+            } else if (myNumber.size() == 2 && mySum == BLACK_JACK_SCORE) {
                 System.out.println("You win!");
-            } else if (dealerNumber.size() == 2 && dealerSum == 21) {
+            } else if (dealerNumber.size() == 2 && dealerSum == BLACK_JACK_SCORE) {
                 System.out.println("Dealer win!");
             } else {
                 System.out.println("Draw");
