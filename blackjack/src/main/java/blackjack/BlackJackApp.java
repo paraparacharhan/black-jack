@@ -51,7 +51,7 @@ public class BlackJackApp {
         System.out.println("(" + sum + ")");
     }
 
-    public static boolean isBurst(int sum) {
+    public static boolean isBust(int sum) {
         return sum > BLACK_JACK_SCORE;
     }
 
@@ -169,9 +169,9 @@ public class BlackJackApp {
                 // Playerの手札を表示する
                 display("You", myNumber, mySuit, mySum);
 
-                // Burstか判定する
-                if (isBurst(mySum)) {
-                    System.out.println("You Burst");
+                // Bustか判定する
+                if (isBust(mySum)) {
+                    System.out.println("You Bust");
                     return;
                 }
 
@@ -216,9 +216,9 @@ public class BlackJackApp {
             display("Dealer", dealerNumber, dealerSuit, dealerSum);
         }
 
-        // Burstか判定する
-        if (isBurst(dealerSum)) {
-            System.out.println("Dealer burst");
+        // Bustか判定する
+        if (isBust(dealerSum)) {
+            System.out.println("Dealer bust");
             return;
         }
 
