@@ -23,6 +23,10 @@ public class BlackJackApp {
         return handsOfNumberCards.stream().mapToInt(Integer::intValue).sum();
     }
 
+    public static boolean isBlackJack(int sum) {
+        return sum == 21;
+    }
+
     public static void main(String[] args) {
         System.out.println("Game start!");
 
@@ -80,10 +84,7 @@ public class BlackJackApp {
         int mySum = totalScore(myNumber);
 
         // BlackJackか判定し、ステータスとする
-        boolean myStatus = false;
-        if (mySum == 21) {
-            myStatus = true;
-        }
+        boolean myStatus = isBlackJack(mySum);
 
         // Aを1か11かで変化するのを判定する
         for (int i = 0; i < myNumber.size(); i++) {
@@ -178,10 +179,7 @@ public class BlackJackApp {
         System.out.println("(" + dealerSum + ")");
 
         // BrackJackか判定し、ステータスとする
-        boolean dealerStatus = false;
-        if (dealerSum == 21) {
-            dealerStatus = true;
-        }
+        boolean dealerStatus = isBlackJack(dealerSum);
 
         // Dealerが17以上になるまで続ける
         while (dealerSum < 17 && !dealerStatus && !myStatus) {
