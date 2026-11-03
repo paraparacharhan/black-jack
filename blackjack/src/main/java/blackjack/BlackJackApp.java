@@ -19,6 +19,10 @@ public class BlackJackApp {
         handOfSuitCards.add(suitDeck.pop());
     }
 
+    public static int totalScore(List<Integer> handsOfNumberCards) {
+        return handsOfNumberCards.stream().mapToInt(Integer::intValue).sum();
+    }
+
     public static void main(String[] args) {
         System.out.println("Game start!");
 
@@ -61,7 +65,7 @@ public class BlackJackApp {
                 "Dealer: " + dealerNumber.get(dealerIndex) + " of " + dealerSuit.get(dealerIndex) + ", [hidden]");
 
         // Dealerの合計を計算する
-        int dealerSum = dealerNumber.get(0) + dealerNumber.get(1);
+        int dealerSum = totalScore(dealerNumber);
 
         // Playerの手札を生成する
         List<Integer> myNumber = new ArrayList<>();
@@ -73,7 +77,7 @@ public class BlackJackApp {
         drawCards(deckNumberList, deckSuitList, myNumber, mySuit);
 
         // Playerの合計を計算する
-        int mySum = myNumber.get(myIndex) + myNumber.get(myIndex + 1);
+        int mySum = totalScore(myNumber);
 
         // BlackJackか判定し、ステータスとする
         boolean myStatus = false;
@@ -119,7 +123,7 @@ public class BlackJackApp {
                 drawCards(deckNumberList, deckSuitList, myNumber, mySuit);
 
                 // Playerの合計を計算する
-                mySum += myNumber.get(myNumber.size() - 1);
+                mySum = totalScore(myNumber);
 
                 // 引いたカードを表示する
                 System.out.println(
@@ -191,7 +195,7 @@ public class BlackJackApp {
                             + dealerSuit.get(dealerSuit.size() - 1)
                             + " .");
             // Dealerの合計を計算する
-            dealerSum += dealerNumber.get(dealerNumber.size() - 1);
+            dealerSum = totalScore(dealerNumber);
 
             // Aを1か11かで変化するのを判定する
             for (int i = 0; i < dealerNumber.size(); i++) {
