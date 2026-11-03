@@ -16,7 +16,7 @@ public class BlackJackApp {
     public static final int BLACK_JACK_SCORE = 21;
     public static final int DEALER_BORDER_SCORE = 17;
 
-    public static void drawCards(LinkedList<Integer> numberDeck, LinkedList<String> suitDeck,
+    public static void drawCard(LinkedList<Integer> numberDeck, LinkedList<String> suitDeck,
             List<Integer> handOfNumberCards, List<String> handOfSuitCards) {
         handOfNumberCards.add(numberDeck.pop());
         handOfSuitCards.add(suitDeck.pop());
@@ -30,7 +30,7 @@ public class BlackJackApp {
         return sum == BLACK_JACK_SCORE && handOfNumberCards.size() == 2;
     }
 
-    public static int checkAceScore(List<Integer> handsOfNumberCards, int sum) {
+    public static int adjustAceValue(List<Integer> handsOfNumberCards, int sum) {
         // handsOfNumberCards.stream().filter(t -> t > sum && t == 11).map(t ->
         // 1).toList();
         for (int i = 0; i < handsOfNumberCards.size(); i++) {
@@ -85,8 +85,8 @@ public class BlackJackApp {
         int dealerIndex = 0;
 
         // メソッド切り出し
-        drawCards(deckNumberList, deckSuitList, dealerNumber, dealerSuit);
-        drawCards(deckNumberList, deckSuitList, dealerNumber, dealerSuit);
+        drawCard(deckNumberList, deckSuitList, dealerNumber, dealerSuit);
+        drawCard(deckNumberList, deckSuitList, dealerNumber, dealerSuit);
 
         // Dealerの手札を表示する（1枚隠し）
         System.out.println(
@@ -101,8 +101,8 @@ public class BlackJackApp {
         int myIndex = 0;
 
         // メソッド切り出し
-        drawCards(deckNumberList, deckSuitList, myNumber, mySuit);
-        drawCards(deckNumberList, deckSuitList, myNumber, mySuit);
+        drawCard(deckNumberList, deckSuitList, myNumber, mySuit);
+        drawCard(deckNumberList, deckSuitList, myNumber, mySuit);
 
         // Playerの合計を計算する
         int mySum = totalScore(myNumber);
@@ -111,7 +111,7 @@ public class BlackJackApp {
         boolean myStatus = isBlackJack(myNumber, mySuit, mySum);
 
         // Aceが11か1か判定
-        mySum = checkAceScore(myNumber, mySum);
+        mySum = adjustAceValue(myNumber, mySum);
 
         // Playerの手札を表示する
         display("You", myNumber, mySuit, mySum);
@@ -134,7 +134,7 @@ public class BlackJackApp {
                 System.out.println("[h]it or [s]tand? > h");
 
                 // メソッド切り出し
-                drawCards(deckNumberList, deckSuitList, myNumber, mySuit);
+                drawCard(deckNumberList, deckSuitList, myNumber, mySuit);
 
                 // Playerの合計を計算する
                 mySum = totalScore(myNumber);
@@ -144,7 +144,7 @@ public class BlackJackApp {
                         "You: " + myNumber.get(myNumber.size() - 1) + " of " + mySuit.get(mySuit.size() - 1) + " .");
 
                 // Aceが11か1か判定
-                mySum = checkAceScore(myNumber, mySum);
+                mySum = adjustAceValue(myNumber, mySum);
 
                 // Playerの手札を表示する
                 display("You", myNumber, mySuit, mySum);
@@ -167,7 +167,7 @@ public class BlackJackApp {
         }
 
         // Aceが11か1か判定
-        dealerSum = checkAceScore(dealerNumber, dealerSum);
+        dealerSum = adjustAceValue(dealerNumber, dealerSum);
 
         // Dealerの手札を表示する
         display("Dealer", dealerNumber, dealerSuit, dealerSum);
@@ -179,7 +179,7 @@ public class BlackJackApp {
         while (dealerSum < DEALER_BORDER_SCORE && !dealerStatus && !myStatus) {
 
             // メソッド切り出し
-            drawCards(deckNumberList, deckSuitList, dealerNumber, dealerSuit);
+            drawCard(deckNumberList, deckSuitList, dealerNumber, dealerSuit);
 
             // Dealerの引いたカードを表示する
             System.out.println(
@@ -190,7 +190,7 @@ public class BlackJackApp {
             dealerSum = totalScore(dealerNumber);
 
             // Aceが11か1か判定
-            dealerSum = checkAceScore(dealerNumber, dealerSum);
+            dealerSum = adjustAceValue(dealerNumber, dealerSum);
 
             // Dealerの手札を表示する
             display("Dealer", dealerNumber, dealerSuit, dealerSum);
