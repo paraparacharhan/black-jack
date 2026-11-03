@@ -55,25 +55,20 @@ public class BlackJackApp {
         return sum > BLACK_JACK_SCORE;
     }
 
-    public static void judge(int playerSum, int dealerSum, boolean playerStatus, boolean dealerStatus) {
-        System.out.print("You: " + playerSum + " / ");
-        System.out.println("Dealer: " + dealerSum);
-        if (playerSum > dealerSum) {
-            System.out.println("You win!");
-        } else if (playerSum < dealerSum) {
-            System.out.println("Dealer win!");
+    public static String judge(int playerSum, int dealerSum, boolean playerStatus, boolean dealerStatus) {
+        if (playerStatus && dealerStatus) {
+            return "Draw";
+        } else if (playerSum > dealerSum || playerStatus) {
+            return "You win!";
+        } else if (playerSum < dealerSum || dealerStatus) {
+            return "Dealer win!";
         } else {
-            // 同点でBlackJackがあるか判定
-            if (playerStatus && dealerStatus) {
-                System.out.println("Draw");
-            } else if (playerStatus) {
-                System.out.println("You win!");
-            } else if (dealerStatus) {
-                System.out.println("Dealer win!");
-            } else {
-                System.out.println("Draw");
-            }
+            return "Draw";
         }
+    }
+
+    public static void displayResult(String result) {
+        System.out.println(result);
     }
 
     public static void main(String[] args) {
@@ -228,7 +223,11 @@ public class BlackJackApp {
         }
 
         // 最終結果を表示する
-        judge(mySum, dealerSum, myStatus, dealerStatus);
+        System.out.print("You: " + mySum + " / ");
+        System.out.println("Dealer: " + dealerSum);
+        String result = judge(mySum, dealerSum, myStatus, dealerStatus);
+
+        displayResult(result);
 
         scanner.close();
     }
