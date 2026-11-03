@@ -26,8 +26,8 @@ public class BlackJackApp {
         return handsOfNumberCards.stream().mapToInt(Integer::intValue).sum();
     }
 
-    public static boolean isBlackJack(int sum) {
-        return sum == BLACK_JACK_SCORE;
+    public static boolean isBlackJack(List<Integer> handOfNumberCards, List<String> handOfSuitCards, int sum) {
+        return sum == BLACK_JACK_SCORE && handOfNumberCards.size() == 2;
     }
 
     public static int checkAceScore(List<Integer> handsOfNumberCards, int sum) {
@@ -108,7 +108,7 @@ public class BlackJackApp {
         int mySum = totalScore(myNumber);
 
         // BlackJackか判定し、ステータスとする
-        boolean myStatus = isBlackJack(mySum);
+        boolean myStatus = isBlackJack(myNumber, mySuit, mySum);
 
         // Aceが11か1か判定
         mySum = checkAceScore(myNumber, mySum);
@@ -173,7 +173,7 @@ public class BlackJackApp {
         display("Dealer", dealerNumber, dealerSuit, dealerSum);
 
         // BrackJackか判定し、ステータスとする
-        boolean dealerStatus = isBlackJack(dealerSum);
+        boolean dealerStatus = isBlackJack(dealerNumber, dealerSuit, dealerSum);
 
         // Dealerが17以上になるまで続ける
         while (dealerSum < DEALER_BORDER_SCORE && !dealerStatus && !myStatus) {
@@ -211,12 +211,11 @@ public class BlackJackApp {
             System.out.println("Dealer win!");
         } else {
             // 同点でBlackJackがあるか判定
-            if (myNumber.size() == 2 && mySum == BLACK_JACK_SCORE && dealerNumber.size() == 2
-                    && dealerSum == BLACK_JACK_SCORE) {
+            if (myStatus && dealerStatus) {
                 System.out.println("Draw");
-            } else if (myNumber.size() == 2 && mySum == BLACK_JACK_SCORE) {
+            } else if (myStatus) {
                 System.out.println("You win!");
-            } else if (dealerNumber.size() == 2 && dealerSum == BLACK_JACK_SCORE) {
+            } else if (dealerStatus) {
                 System.out.println("Dealer win!");
             } else {
                 System.out.println("Draw");
