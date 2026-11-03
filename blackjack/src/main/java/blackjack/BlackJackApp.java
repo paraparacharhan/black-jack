@@ -230,5 +230,6 @@ public class BlackJackApp {
         displayResult(result);
 
         scanner.close();
+
     }
 }
