@@ -12,6 +12,13 @@ import java.util.Scanner;
  * Hello world!
  */
 public class BlackJackApp {
+
+    public static void drawCards(LinkedList<Integer> numberDeck, LinkedList<String> suitDeck,
+            List<Integer> handOfNumberCards, List<String> handOfSuitCards) {
+        handOfNumberCards.add(numberDeck.pop());
+        handOfSuitCards.add(suitDeck.pop());
+    }
+
     public static void main(String[] args) {
         System.out.println("Game start!");
 
@@ -45,11 +52,9 @@ public class BlackJackApp {
         List<String> dealerSuit = new ArrayList<>();
         int dealerIndex = 0;
 
-        // Dealerがカードを引く
-        dealerNumber.add(deckNumberList.pop());
-        dealerSuit.add(deckSuitList.pop());
-        dealerNumber.add(deckNumberList.pop());
-        dealerSuit.add(deckSuitList.pop());
+        // メソッド切り出し
+        drawCards(deckNumberList, deckSuitList, dealerNumber, dealerSuit);
+        drawCards(deckNumberList, deckSuitList, dealerNumber, dealerSuit);
 
         // Dealerの手札を表示する（1枚隠し）
         System.out.println(
@@ -63,11 +68,9 @@ public class BlackJackApp {
         List<String> mySuit = new ArrayList<>();
         int myIndex = 0;
 
-        // Playerがカードを引く
-        myNumber.add(deckNumberList.pop());
-        mySuit.add(deckSuitList.pop());
-        myNumber.add(deckNumberList.pop());
-        mySuit.add(deckSuitList.pop());
+        // メソッド切り出し
+        drawCards(deckNumberList, deckSuitList, myNumber, mySuit);
+        drawCards(deckNumberList, deckSuitList, myNumber, mySuit);
 
         // Playerの合計を計算する
         int mySum = myNumber.get(myIndex) + myNumber.get(myIndex + 1);
@@ -111,8 +114,9 @@ public class BlackJackApp {
             if (input.equals("h")) {
                 // Playerがカードを1枚引く
                 System.out.println("[h]it or [s]tand? > h");
-                myNumber.add(deckNumberList.pop());
-                mySuit.add(deckSuitList.pop());
+
+                // メソッド切り出し
+                drawCards(deckNumberList, deckSuitList, myNumber, mySuit);
 
                 // Playerの合計を計算する
                 mySum += myNumber.get(myNumber.size() - 1);
@@ -178,9 +182,8 @@ public class BlackJackApp {
         // Dealerが17以上になるまで続ける
         while (dealerSum < 17 && !dealerStatus && !myStatus) {
 
-            // Dealerがカードを1枚引く
-            dealerNumber.add(deckNumberList.pop());
-            dealerSuit.add(deckSuitList.pop());
+            // メソッド切り出し
+            drawCards(deckNumberList, deckSuitList, dealerNumber, dealerSuit);
 
             // Dealerの引いたカードを表示する
             System.out.println(
