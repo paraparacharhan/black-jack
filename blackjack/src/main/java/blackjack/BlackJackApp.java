@@ -51,6 +51,10 @@ public class BlackJackApp {
         System.out.println("(" + sum + ")");
     }
 
+    public static boolean isBurst(int sum) {
+        return sum > BLACK_JACK_SCORE;
+    }
+
     public static void judge(int playerSum, int dealerSum, boolean playerStatus, boolean dealerStatus) {
         System.out.print("You: " + playerSum + " / ");
         System.out.println("Dealer: " + dealerSum);
@@ -171,7 +175,7 @@ public class BlackJackApp {
                 display("You", myNumber, mySuit, mySum);
 
                 // Burstか判定する
-                if (mySum > BLACK_JACK_SCORE) {
+                if (isBurst(mySum)) {
                     System.out.println("You Burst");
                     return;
                 }
@@ -218,7 +222,7 @@ public class BlackJackApp {
         }
 
         // Burstか判定する
-        if (dealerSum > BLACK_JACK_SCORE) {
+        if (isBurst(dealerSum)) {
             System.out.println("Dealer burst");
             return;
         }
