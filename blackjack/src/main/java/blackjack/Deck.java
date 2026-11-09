@@ -2,16 +2,25 @@ package blackjack;
 
 import java.util.Collections;
 import java.util.LinkedList;
+import java.util.Random;
 
 public class Deck {
     private LinkedList<Card> deck = new LinkedList<>();
 
-    public void generate() {
+    public void generate(Random random) {
         for (Suit s : Suit.values()) {
             for (Rank r : Rank.values()) {
                 deck.add(new Card(r, s));
             }
         }
-        Collections.shuffle(deck);
+        Collections.shuffle(deck, random);
+    }
+
+    public Card draw() {
+        return deck.pop();
+    }
+
+    public boolean isEmpty() {
+        return deck.isEmpty();
     }
 }
