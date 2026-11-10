@@ -2,7 +2,11 @@ package blackjack;
 
 import java.util.Scanner;
 
-public record Player(String name, Hand hand, Scanner scanner) {
+public class Player {
+    private final String name;
+    private Hand hand;
+    private final Scanner scanner;
+
     public Player(String name, Hand hand, Scanner scanner) {
         this.name = name;
         this.hand = hand;
@@ -17,5 +21,17 @@ public record Player(String name, Hand hand, Scanner scanner) {
             }
             System.err.println("h or s");
         }
+    }
+
+    String name() {
+        return this.name;
+    }
+
+    Hand hand() {
+        return this.hand;
+    }
+
+    void addHand(Card card) {
+        this.hand = this.hand.add(card);
     }
 }

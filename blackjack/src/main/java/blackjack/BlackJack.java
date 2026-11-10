@@ -39,7 +39,7 @@ public class BlackJack {
             String choise = player.input();
 
             if (choise.equals("h")) {
-                player.hand().add(deck.draw());
+                player.addHand(deck.draw());
 
                 System.out.println("you~~~");
             } else if (choise.equals("s")) {
@@ -56,7 +56,7 @@ public class BlackJack {
 
         while (dealer.hand().totalScore() < DEALER_BORDER_SCORE && !dealer.hand().blackJack()
                 && !player.hand().blackJack()) {
-            dealer.hand().add(deck.draw());
+            dealer.addHand(deck.draw());
 
             System.out.println("Dealer~~~");
 
