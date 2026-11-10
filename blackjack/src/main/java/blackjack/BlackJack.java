@@ -47,6 +47,11 @@ public class BlackJack {
             }
         }
 
+        if (player.hand().isBust()) {
+            System.out.println("You Bust");
+            return;
+        }
+
         System.out.println("Dealer~~~");
 
         while (dealer.hand().totalScore() < DEALER_BORDER_SCORE && !dealer.hand().blackJack()
