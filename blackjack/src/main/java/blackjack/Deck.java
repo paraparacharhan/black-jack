@@ -8,6 +8,7 @@ public class Deck {
     private LinkedList<Card> deck = new LinkedList<>();
 
     public void generate(Random random) {
+        deck.clear();
         for (Suit s : Suit.values()) {
             for (Rank r : Rank.values()) {
                 deck.add(new Card(r, s));
