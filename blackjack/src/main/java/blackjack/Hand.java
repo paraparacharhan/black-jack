@@ -1,5 +1,6 @@
 package blackjack;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Hand {
@@ -19,11 +20,11 @@ public class Hand {
     }
 
     public Hand add(Card card) {
-        List<Card> newHand = List.copyOf(this.hand);
+        List<Card> newHand = new ArrayList<>(this.hand);
         newHand.add(card);
         int totalScore = calculateTotalScore(newHand);
         boolean blackJack = isBlackJack(newHand, this.totalScore);
-        return new Hand(newHand, totalScore, blackJack);
+        return new Hand(List.copyOf(newHand), totalScore, blackJack);
     }
 
     private static int calculateTotalScore(List<Card> hand) {
