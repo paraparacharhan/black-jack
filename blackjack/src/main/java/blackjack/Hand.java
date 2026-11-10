@@ -10,7 +10,7 @@ public class Hand {
     private final boolean blackJack;
 
     private Hand(List<Card> hand, int totalScore, boolean blackJack) {
-        this.hand = hand;
+        this.hand = List.copyOf(hand);
         this.totalScore = totalScore;
         this.blackJack = blackJack;
     }
