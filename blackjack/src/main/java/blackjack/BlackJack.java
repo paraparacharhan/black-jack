@@ -36,12 +36,13 @@ public class BlackJack {
             // }
 
             System.out.println("[h]it or [s]tand? > ");
+            String choise = player.input();
 
-            if (player.input().equals("h")) {
+            if (choise.equals("h")) {
                 player.hand().add(deck.draw());
 
                 System.out.println("you~~~");
-            } else if (player.input().equals("s")) {
+            } else if (choise.equals("s")) {
                 break;
             }
         }
