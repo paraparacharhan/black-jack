@@ -60,7 +60,7 @@ public class Hand {
     // }
 
     public boolean isBust() {
-        return this.totalScore > BLACK_JACK_SCORE ? false : true;
+        return this.totalScore > BLACK_JACK_SCORE ? true : false;
     }
 
     public boolean blackJack() {
