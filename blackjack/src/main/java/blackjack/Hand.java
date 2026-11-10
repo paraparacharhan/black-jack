@@ -23,7 +23,7 @@ public class Hand {
         List<Card> newHand = new ArrayList<>(this.hand);
         newHand.add(card);
         int totalScore = calculateTotalScore(newHand);
-        boolean blackJack = isBlackJack(newHand, this.totalScore);
+        boolean blackJack = isBlackJack(newHand, totalScore);
         return new Hand(List.copyOf(newHand), totalScore, blackJack);
     }
 
