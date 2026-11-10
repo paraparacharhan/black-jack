@@ -1,15 +1,8 @@
 package blackjack;
 
-public class Dealer {
-    private final String name;
-    private Hand hand;
-
+public record Dealer(String name, Hand hand) {
     public Dealer(String name, Hand hand) {
         this.name = name;
         this.hand = hand;
-    }
-
-    public String name() {
-        return this.name;
     }
 }
