@@ -24,12 +24,12 @@
     - 伏せる・開く
     - 比べる
 
-```
+```bash
 ./mvnw -q compile
-printf 'h\ns\n' | java -cp target/classes blackjack.BlackJackApp 194 > before.txt
+printf 'h\nh\ns\n' | java -cp target/classes blackjack.BlackJackApp 194 > before.txt
 // 一括実装後
 
 ./mvnw -q compile
-printf 'h\ns\n' | java -cp target/classes blackjack.BlackJackApp 194 > after.txt
+printf 'h\nh\ns\n' | java -cp target/classes blackjack.BlackJackApp 194 > after.txt
 diff before.txt after.txt
 ```
