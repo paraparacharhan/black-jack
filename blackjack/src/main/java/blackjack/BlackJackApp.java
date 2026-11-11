@@ -1,16 +1,7 @@
 package blackjack;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Random;
-import java.util.Scanner;
 
-/**
- * Hello world!
- */
 public class BlackJackApp {
     public static void main(String[] args) {
         Random random = new Random();

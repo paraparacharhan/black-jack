@@ -42,24 +42,6 @@ public class Hand {
         return sum == BLACK_JACK_SCORE && hand.size() == 2;
     }
 
-    // public static int adjustAceValue(List<Card> hand) {
-    // // handsOfNumberCards.stream().filter(t -> t > sum && t == 11).map(t ->
-    // // 1).toList();
-    // int sum = totalScore(hand);
-    // // for (int i = 0; i < hand.size(); i++) {
-    // // if (sum > BLACK_JACK_SCORE && hand.rank.score() == 11) {
-    // // hand.set(i, 1);
-    // // sum -= 10;
-    // // }
-    // // }
-    // for (Card c : hand) {
-    // if (sum > BLACK_JACK_SCORE && c.rank().score() == 11) {
-    // sum -= 10;
-    // }
-    // }
-    // return sum;
-    // }
-
     public boolean isBust() {
         return this.totalScore > BLACK_JACK_SCORE ? true : false;
     }

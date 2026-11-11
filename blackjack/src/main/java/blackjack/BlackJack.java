@@ -5,9 +5,6 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-/**
- * BlackJack
- */
 public class BlackJack {
     public static final int BLACK_JACK_SCORE = 21;
     public static final int DEALER_BORDER_SCORE = 17;
