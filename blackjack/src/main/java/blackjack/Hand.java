@@ -71,4 +71,8 @@ public class Hand {
     public int totalScore() {
         return this.totalScore;
     }
+
+    public List<Card> cards() {
+        return this.hand;
+    }
 }

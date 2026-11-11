@@ -3,6 +3,7 @@ package blackjack;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 /**
  * BlackJack
@@ -19,7 +20,7 @@ public class BlackJack {
         // dealer.hand().of(dealerHand);
         Dealer dealer = new Dealer("Dealer", Hand.of(dealerHand));
 
-        System.out.println("dealer~~~");
+        displayDealerFirstHand(dealer);
 
         List<Card> playerHand = new ArrayList<>();
         playerHand.add(deck.draw());
@@ -28,7 +29,7 @@ public class BlackJack {
         Scanner scanner = new Scanner(System.in);
         Player player = new Player("Player", Hand.of(playerHand), scanner);
 
-        System.out.println("You~~~");
+        displayHand(player.name(), player.hand());
 
         while (!player.hand().isBust() && !player.hand().blackJack()) {
             // if (player.hand().blackJack()) {
@@ -39,9 +40,11 @@ public class BlackJack {
             String choise = player.input();
 
             if (choise.equals("h")) {
-                player.addHand(deck.draw());
 
-                System.out.println("you~~~");
+                Card hitCard = deck.draw();
+                player.addHand(hitCard);
+
+                displayHitCard(player.name(), hitCard);
             } else if (choise.equals("s")) {
                 break;
             }
@@ -52,15 +55,16 @@ public class BlackJack {
             return;
         }
 
-        System.out.println("Dealer~~~");
+        displayHand(dealer.name(), dealer.hand());
 
         while (dealer.hand().totalScore() < DEALER_BORDER_SCORE && !dealer.hand().blackJack()
                 && !player.hand().blackJack()) {
-            dealer.addHand(deck.draw());
+            Card hitCard = deck.draw();
+            dealer.addHand(hitCard);
 
-            System.out.println("Dealer~~~");
+            displayHitCard(dealer.name(), hitCard);
 
-            System.out.println("Dealer~~~");
+            displayHand(dealer.name(), dealer.hand());
         }
 
         if (dealer.hand().isBust()) {
@@ -87,4 +91,18 @@ public class BlackJack {
         }
     }
 
+    public void displayDealerFirstHand(Dealer dealer) {
+        System.out.print(dealer.name() + ": " + dealer.hand().cards().stream().limit(1)
+                .map(c -> c.rank() + " of " + c.suit()).collect(Collectors.joining(",")) + ", [hidden]");
+    }
+
+    public void displayHand(String name, Hand hand) {
+        System.out.println(name + ": " + hand.cards().stream()
+                .map(c -> c.rank() + " of " + c.suit()).collect(Collectors.joining(",")) + " (" + hand.totalScore()
+                + ")");
+    }
+
+    public void displayHitCard(String name, Card card) {
+        System.out.println(name + "; " + card.rank() + " of " + card.suit() + " .");
+    }
 }
