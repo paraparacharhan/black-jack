@@ -24,7 +24,7 @@ public class Hand {
         newHand.add(card);
         int totalScore = calculateTotalScore(newHand);
         boolean blackJack = isBlackJack(newHand, totalScore);
-        return new Hand(List.copyOf(newHand), totalScore, blackJack);
+        return new Hand(newHand, totalScore, blackJack);
     }
 
     private static int calculateTotalScore(List<Card> hand) {
@@ -43,7 +43,7 @@ public class Hand {
     }
 
     public boolean isBust() {
-        return this.totalScore > BLACK_JACK_SCORE ? true : false;
+        return this.totalScore > BLACK_JACK_SCORE;
     }
 
     public boolean blackJack() {

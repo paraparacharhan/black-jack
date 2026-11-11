@@ -34,7 +34,7 @@ public class BlackJack {
             if (playerChoice.equals("h")) {
 
                 Card hitCard = deck.draw();
-                player.addHand(hitCard);
+                player.receive(hitCard);
 
                 displayHitCard(player.name(), hitCard);
                 displayHand(player.name(), player.hand());
@@ -52,10 +52,10 @@ public class BlackJack {
 
         while (dealer.hand().totalScore() < DEALER_BORDER_SCORE && !dealer.hand().blackJack()
                 && !player.hand().blackJack()) {
-            Card hitCard = deck.draw();
-            dealer.addHand(hitCard);
+            Card drawCard = deck.draw();
+            dealer.receive(drawCard);
 
-            displayHitCard(dealer.name(), hitCard);
+            displayHitCard(dealer.name(), drawCard);
 
             displayHand(dealer.name(), dealer.hand());
         }
@@ -69,7 +69,7 @@ public class BlackJack {
 
     }
 
-    public static void displayResult(Player player, Dealer dealer) {
+    private static void displayResult(Player player, Dealer dealer) {
         System.out.print(player.name() + ": " + player.hand().totalScore() + " / ");
         System.out.println(dealer.name() + ": " + dealer.hand().totalScore());
 
@@ -84,13 +84,13 @@ public class BlackJack {
         }
     }
 
-    public void displayDealerFirstHand(Dealer dealer) {
+    private void displayDealerFirstHand(Dealer dealer) {
         System.out.println(dealer.name() + ": " + dealer.hand().cards().stream().limit(1)
                 .map(c -> c.rank().label() + " of " + c.suit().label()).collect(Collectors.joining(", "))
                 + ", [hidden]");
     }
 
-    public void displayHand(String name, Hand hand) {
+    private void displayHand(String name, Hand hand) {
         System.out.println(name + ": " + hand.cards().stream()
                 .map(c -> c.rank().label() + " of " + c.suit().label()).collect(Collectors.joining(", ")) + " ("
                 + hand.totalScore()

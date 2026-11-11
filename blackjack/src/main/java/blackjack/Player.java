@@ -32,7 +32,7 @@ public class Player {
         return this.hand;
     }
 
-    void addHand(Card card) {
+    void receive(Card card) {
         this.hand = this.hand.add(card);
     }
 }
