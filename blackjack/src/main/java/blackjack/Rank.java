@@ -23,6 +23,10 @@ public enum Rank {
         this.score = score;
     }
 
+    public String label() {
+        return label;
+    }
+
     public int score() {
         return score;
     }

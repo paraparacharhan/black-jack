@@ -11,4 +11,8 @@ public enum Suit {
     Suit(String label) {
         this.label = label;
     }
+
+    public String label() {
+        return label;
+    }
 }

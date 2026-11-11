@@ -93,16 +93,18 @@ public class BlackJack {
 
     public void displayDealerFirstHand(Dealer dealer) {
         System.out.print(dealer.name() + ": " + dealer.hand().cards().stream().limit(1)
-                .map(c -> c.rank() + " of " + c.suit()).collect(Collectors.joining(",")) + ", [hidden]");
+                .map(c -> c.rank().label() + " of " + c.suit().label()).collect(Collectors.joining(","))
+                + ", [hidden]");
     }
 
     public void displayHand(String name, Hand hand) {
         System.out.println(name + ": " + hand.cards().stream()
-                .map(c -> c.rank() + " of " + c.suit()).collect(Collectors.joining(",")) + " (" + hand.totalScore()
+                .map(c -> c.rank().label() + " of " + c.suit().label()).collect(Collectors.joining(",")) + " ("
+                + hand.totalScore()
                 + ")");
     }
 
     public void displayHitCard(String name, Card card) {
-        System.out.println(name + "; " + card.rank() + " of " + card.suit() + " .");
+        System.out.println(name + "; " + card.rank().label() + " of " + card.suit().label() + " .");
     }
 }
