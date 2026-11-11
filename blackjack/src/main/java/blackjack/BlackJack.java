@@ -29,21 +29,16 @@ public class BlackJack {
         displayHand(player.name(), player.hand());
 
         while (!player.hand().isBust() && !player.hand().blackJack()) {
-            // if (player.hand().blackJack()) {
-            // break;
-            // }
+            String playerChoice = player.input();
 
-            System.out.print("[h]it or [s]tand? > ");
-            String choise = player.input();
-
-            if (choise.equals("h")) {
+            if (playerChoice.equals("h")) {
 
                 Card hitCard = deck.draw();
                 player.addHand(hitCard);
 
                 displayHitCard(player.name(), hitCard);
                 displayHand(player.name(), player.hand());
-            } else if (choise.equals("s")) {
+            } else if (playerChoice.equals("s")) {
                 break;
             }
         }
