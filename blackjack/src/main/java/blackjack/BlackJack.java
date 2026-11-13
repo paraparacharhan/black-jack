@@ -14,7 +14,6 @@ public class BlackJack {
         dealerHand.add(deck.draw());
         dealerHand.add(deck.draw());
 
-        // dealer.hand().of(dealerHand);
         Dealer dealer = new Dealer("Dealer", Hand.of(dealerHand));
 
         displayDealerFirstHand(dealer);
